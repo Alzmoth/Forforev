@@ -1,0 +1,103 @@
+<!--
+  Generated template for the StokListeDetayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Liste Detayı</ion-title>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card-content style="padding-bottom:10px;padding-right:20px">
+
+
+
+    <ion-card padding>
+
+      <span>
+        <b> Sayım Liste Numarası: {{this.gelen.fatura_no}}</b>
+      </span>
+      <p>
+        <span>Olusturan Kisi: {{this.gelen.username}} </span>
+      </p>
+
+      <p>
+        <span> {{this.gelen.fatura_tarih |date: 'dd/MM/yyyy H:mm'}} </span>
+      </p>
+      <p>
+        <span *ngIf="this.gelen.aciklama!=null"> Liste Acıklaması: {{this.gelen.aciklama}} </span>
+      </p>
+
+
+
+    </ion-card>
+
+  </ion-card-content>
+
+
+
+  <ion-list *ngFor="let item of dataSet">
+
+    <ion-item class="asd">
+
+
+      <ion-label>
+        Urun Adı: {{item.stok_adi}}
+        <ion-row>
+
+          <ion-col>
+            <p> Barkod numarasi: {{item.barkod}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-item class="inputsol">
+          <ion-label color="primary" class="inputstok">Stok Kodu: {{item.stok_kodu}}
+          </ion-label>
+          <ion-label color="primary">Adet:</ion-label>
+          <ion-input style="font-weight: bold" type="number" [(ngModel)]="item.stok_adet" clearInput></ion-input>
+
+        </ion-item>
+      </ion-label>
+
+    </ion-item>
+
+
+
+  </ion-list>
+
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="marginTop" (click)="yazdir()">Yazdır</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block color="marginTop" (click)="downloadCSV()">Excel Indir</button>
+      </ion-col>
+
+
+      <ion-col>
+        <button ion-button block class="lightprimary" (click)="sil( )">Sil</button>
+      </ion-col>
+
+
+      <ion-col >
+        <button ion-button block color="marginTop" (click)="kaydet()">Kaydet</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</ion-content>

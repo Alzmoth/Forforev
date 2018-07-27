@@ -1,0 +1,15 @@
+# ionic-restful-authentication
+
+Bir Sirkete özel olarak mysql ile geliştirdiğim proje. 
+Proje daha bitmediği githupa full sürümü atmadım
+
+Apk çıktısı almak için 
+ionic cordova build android --prod --release
+
+imzlamak için ayarı yapılacak linkteki gibi
+https://www.youtube.com/watch?v=Q_sb8AfHldU
+
+keytool -genkey -v -keystore mostAwesomeKeyEver.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+ana sayfaya gelip bu kod çalıştırılacak
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mostAwesomeKeyEver.keystore Forev.apk alias_name

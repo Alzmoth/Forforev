@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Kayıt Edilmis Stok Listeleri</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+
+
+  <ion-card *ngFor="let item of dataSet" (click)="itemTapped($event,item)">
+    <ion-card-content>
+
+      <span>fatura No:
+        <b> {{item.fatura_no}}</b>
+      </span>
+      <p>
+        <span>Kayıt Eden: {{item.username}} </span>
+      </p>
+
+      <p>
+        <span> {{saatCevir(item.fatura_tarih) |date: 'dd/MM/yyyy H:mm'}} </span>
+      </p>
+      <p>
+        <span *ngIf="item.aciklama!=null"> Liste Acıklaması: {{item.aciklama}} </span>
+      </p>
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-card *ngIf="noRecord">
+  <ion-item>
+    Baska liste yok!
+  </ion-item>
+</ion-card>
+
+<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" *ngIf="!noRecord">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
+</ion-content>

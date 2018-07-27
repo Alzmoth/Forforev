@@ -1,0 +1,78 @@
+<ion-content padding>
+  
+
+  <ion-card-content>
+    <span>fatura No:
+      <b> {{this.gelen.fatura_no}}</b>
+    </span>
+    <p>
+      <span>Kayıt Eden: {{this.gelen.username}} </span>
+    </p>
+    <p>
+      <span> Toplam Urun Adedi: {{this.gelen.urun_adedi}} Adet </span>
+    </p>
+    <p>
+      <span> Toplam Tutar:
+        <strong>{{this.gelen.toplam_fiyat | denemee }} TL </strong>
+      </span>
+    </p>
+    <p>
+      <span> {{this.gelen.fatura_tarih |date: 'dd/MM/yyyy H:mm'}} </span>
+    </p>
+    <p>
+      <span *ngIf="this.gelen.aciklama!=null"> Liste Acıklaması: {{this.gelen.aciklama}} </span>
+    </p>
+  </ion-card-content>
+
+
+
+
+  <ion-scroll scrollbar-x="true" scrollbar-y="true" class="data-scroll">
+    <table border="1" class="data-table">
+      <tr>
+        <td>
+          Firma
+        </td>
+        <td>
+          Stok Kodu
+        </td>
+        <td>
+          Stok Adı
+        </td>
+     
+        <td>
+          Adet
+        </td>
+        <td>
+          Fiyat
+        </td>
+        <td>Toplam</td>
+      </tr>
+
+      <tr *ngFor="let row of dataSet; let i=index">
+        <td>
+          {{row.firma_kodu}}
+        </td>
+        <td>
+          {{row.stok_kodu}}
+        </td>
+        <td>
+          {{row.stok_adi}}
+        </td>
+   
+        <td>
+          {{row.stok_adet}}
+        </td>
+        <td>
+          {{row.iskontolu_satis_fiyati | denemee}}
+        </td>
+        <td>
+          {{row.toplam_fiyat}}
+        </td>
+
+
+      </tr>
+    </table>
+  </ion-scroll>
+
+</ion-content>

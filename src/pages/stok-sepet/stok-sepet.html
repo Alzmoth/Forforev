@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Stok Sayım listesi</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+ 
+  
+  <ion-input style="border-style: groove" *ngIf="sayimsepetUrun.length!=0" type="text" [(ngModel)]="stok_fatura.aciklama" placeholder="Açıklama :" clearInput></ion-input>
+
+   
+
+
+
+  <ion-list *ngFor="let item of sayimsepetUrun">
+
+    <ion-item>
+
+
+      <ion-label>
+        Urun Adı: {{item.urun.stok_adi}}
+
+        <ion-item>
+          <ion-label class="inputsol">Kodu:
+            <b>{{item.urun.stok_kodu}} </b>
+          </ion-label>
+          <ion-label>{{item.urun.olcu_birim}}</ion-label>
+          <ion-input type="number" [(ngModel)]="item.urun.stok_adet" clearInput></ion-input>
+        </ion-item>
+      </ion-label>
+
+
+    </ion-item>
+
+
+  </ion-list>
+  <ion-label *ngIf="sayimsepetUrun.length==0">
+    <h1>Liste Bos </h1>
+  </ion-label>
+  <ion-row>
+    <ion-col col-4>
+      <button *ngIf="sayimsepetUrun.length!=0" ion-button block color="primary" (click)="sil()">Sil</button>
+  
+
+    </ion-col>
+    <ion-col col-8>
+      <button *ngIf="sayimsepetUrun.length!=0" ion-button block color="primary" (click)="kaydet()">Kaydet</button>
+  
+    </ion-col>
+  </ion-row>
+
+</ion-content>

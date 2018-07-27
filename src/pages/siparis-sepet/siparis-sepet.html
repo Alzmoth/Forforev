@@ -1,0 +1,111 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Siparis Sepeti</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-card padding>
+  
+      <span>
+        Toplam Urun Adedi: {{this.toplam.toplam_urun_adet}}
+  
+      </span>
+      <span>
+        <p>
+          Urunler Toplami (KDV Dahil):
+          <strong> {{this.toplam.toplam_fiyat | denemee}} TL</strong>
+        </p>
+  
+      </span>
+  
+  
+    </ion-card>
+  
+  
+  
+    <ion-input style="border-style: groove" *ngIf="siparisepetUrun.length!=0" type="text" [(ngModel)]="stok_fatura.aciklama"
+      placeholder="Açıklama :" clearInput></ion-input>
+  
+  
+
+      <ion-list class="urunler">
+
+          <ion-item-sliding *ngFor="let siparis of siparisepetUrun" #item>
+            
+            <ion-item>
+
+                <ion-label>
+                    Urun Adı: {{siparis.urun.stok_adi}}
+                    <p>Urun Kodu:
+                      <b>{{siparis.urun.stok_kodu}} </b>
+                    </p>
+                    <div>Fiyat:
+                        <strong>{{siparis.urun.urun_adet}} * {{ (siparis.urun.kdv_dahil_satis_fiyat)-((siparis.urun.kdv_dahil_satis_fiyat/100)*siparis.urun.sabit_iskonto
+                          )  |denemee}} = {{siparis.urun.urun_adet * (siparis.urun.kdv_dahil_satis_fiyat-((siparis.urun.kdv_dahil_satis_fiyat/100)*siparis.urun.sabit_iskonto
+                          )) |denemee }} TL</strong>
+                      </div>
+            
+                      <ion-row>
+                          <ion-col col-6>
+                            <ion-item>
+                              <ion-label >Ad</ion-label>
+                              <ion-input [(ngModel)]="siparis.urun.urun_adet" type="number" clearInput></ion-input>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col col-6>
+                            <ion-item>
+                              <ion-label >İskonto:</ion-label>
+                              <ion-input [(ngModel)]="siparis.urun.sabit_iskonto" type="number"  clearInput></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+            
+                  </ion-label>
+        
+            
+
+            </ion-item>
+      
+            <ion-item-options>
+              <button ion-button color="secondary" (click)="more($event,siparis)">
+                <ion-icon name="menu"></ion-icon>
+                Urune Git
+              </button>
+       
+              <button ion-button color="dark" (click)="delete($event,siparis)">
+                <ion-icon name="trash"></ion-icon>
+                Urunu Sil
+              </button>
+            </ion-item-options>
+  
+          </ion-item-sliding>
+        </ion-list>
+  
+
+    <ion-label *ngIf="siparisepetUrun.length==0">
+      <h1>Liste Bos </h1>
+    </ion-label>
+    <ion-row>
+      <ion-col col-3>
+        <button *ngIf="siparisepetUrun.length!=0" ion-button block color="primary" (click)="sil()">Sil</button>
+        
+      </ion-col>
+          <ion-col col-3>
+        <button *ngIf="siparisepetUrun.length!=0" ion-button block color="primary" (click)="guncelle()">Guncelle</button>
+      
+      </ion-col>
+      <ion-col col-6>
+        <button *ngIf="siparisepetUrun.length!=0" ion-button block color="primary" (click)="kaydet()">Kaydet</button>
+  
+      </ion-col>
+    </ion-row>
+  
+  
+  </ion-content>
+  

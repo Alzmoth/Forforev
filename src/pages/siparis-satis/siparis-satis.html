@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-segment [(ngModel)]="segment" color="light">
+            <ion-segment-button value="Stoklar">
+                Stoklar
+            </ion-segment-button>
+            <ion-segment-button value="Firmalar">
+                Firmalar
+            </ion-segment-button>
+        </ion-segment>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="presentFilter()">
+                <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="padding-top: 5px" [ngSwitch]="segment">
+
+    <ion-list *ngSwitchCase="'Stoklar'">
+
+
+        <ion-toolbar color="lightprimary" style="padding-top: 10px;">
+            <ion-searchbar placeholder="Arama" [(ngModel)]="queryText" (ionInput)="search()">
+
+            </ion-searchbar>
+        </ion-toolbar>
+
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+
+        <ion-list style="padding-top: 10px">
+            <button ion-item *ngFor="let urun of dataSet" (click)="itemTapped($event,urun)">
+                <div> {{urun.stok_adi}}
+                </div>
+                <div item-right>
+                    {{urun.stok_kodu}}
+                </div>
+            </button>
+        </ion-list>
+        <ion-card *ngIf="noRecord">
+            <ion-item>
+                Baska Stok yok!
+            </ion-item>
+        </ion-card>
+
+        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" *ngIf="!noRecord">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Firmalar'">
+        <ion-toolbar color="lightprimary" style="padding-top: 10px;">
+            <ion-searchbar placeholder="Arama" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()">
+
+            </ion-searchbar>
+        </ion-toolbar>
+
+        <ion-list style="padding-top: 10px">
+
+            <button ion-item *ngFor="let firma of kategori" (click)="kat($event,firma)">
+
+                <div>
+
+                    <h2>
+                        <ion-icon name="ios-radio-button-off"></ion-icon> {{firma.firma_adi}} </h2>
+
+                </div>
+
+            </button>
+
+
+        </ion-list>
+
+
+
+    </ion-list>
+</ion-content>
